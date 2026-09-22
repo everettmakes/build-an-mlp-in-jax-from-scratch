@@ -52,13 +52,11 @@ import jax.numpy as jnp
 
 def init_linear_layer(key, in_dim, out_dim, scale=0.1):
     """Return {'W': (in_dim, out_dim), 'b': (out_dim,)} for one dense layer."""
-    # TODO: sample W from a scaled normal and set b to zeros, return as a dict.
     d = {'W': sample_normal_matrix(key, (in_dim, out_dim)) * scale, 'b': jnp.zeros(out_dim,)}
     return d
 
 # Step 8 - init_mlp_params
 def init_mlp_params(key, layer_sizes, scale=0.1):
-    # TODO: build a list of per-layer parameter dicts from adjacent layer sizes.
     n = len(layer_sizes) - 1
     keys = split_prng_key(key, n)
     arr = np.array([init_linear_layer(keys[i], layer_sizes[i], layer_sizes[i+1], scale) for i in range(n)])
