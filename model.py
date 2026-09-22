@@ -85,8 +85,7 @@ def softmax_probabilities(logits):
 # Step 12 - mlp_forward
 def mlp_forward(params, x):
     for layer in params[:-1]:
-        x = linear_forward(x, layer)
-        x = relu_activation(x)
+        x = relu_activation(linear_forward(x, layer))
     return linear_forward(x, params[-1])
 
 # Step 13 - log_softmax_logits
@@ -104,8 +103,13 @@ def classification_accuracy(logits, labels):
     """Fraction of rows where argmax(logits) equals the integer label."""
     return jnp.sum(jnp.argmax(logits, axis=-1) == labels) / len(labels)
 
-# Step 16 - loss_fn_of_params (not yet solved)
-# TODO: implement
+# Step 16 - loss_fn_of_params
+import jax
+import jax.numpy as jnp
+
+def loss_fn_of_params(params, x, one_hot_targets):
+    logits = mlp_forward(params, x)
+    return cross_entropy_loss(logits, one_hot_targets)
 
 # Step 17 - compute_param_grads (not yet solved)
 # TODO: implement
