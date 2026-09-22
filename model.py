@@ -12,7 +12,6 @@ import jax.numpy as jnp
 
 
 def make_prng_key(seed):
-    # TODO: wrap a Python integer seed into a JAX PRNG key (uint32 array of shape (2,))
     key = jax.random.PRNGKey(seed)
     return key
 
@@ -20,7 +19,6 @@ def make_prng_key(seed):
 import jax
 
 def split_prng_key(key, num):
-    # TODO: split `key` into `num` independent subkeys and return them as a (num, 2) array.
     arr = jax.random.split(key, num)
     return arr
 
@@ -29,7 +27,6 @@ import jax
 import jax.numpy as jnp
 
 def sample_normal_matrix(key, shape):
-    # TODO: return a jnp array of the given shape with i.i.d. N(0,1) samples drawn from key
     arr = jax.random.normal(key, shape)
     return arr
 
