@@ -90,7 +90,8 @@ def mlp_forward(params, x):
 
 # Step 13 - log_softmax_logits
 def log_softmax_logits(logits):
-    return jax.nn.log_softmax(logits, axis=-1)
+    shifted = logits - jnp.max(logits, axis=-1, keepdims=True)
+    return shifted - jnp.log(jnp.sum(jnp.exp(shifted), axis=-1, keepdims=True))
 
 # Step 14 - cross_entropy_loss
 def cross_entropy_loss(logits, one_hot_targets):
