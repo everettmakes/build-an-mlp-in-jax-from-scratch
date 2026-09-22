@@ -94,7 +94,7 @@ def log_softmax_logits(logits):
 
 # Step 14 - cross_entropy_loss
 def cross_entropy_loss(logits, one_hot_targets):
-    return -jnp.mean(jnp.sum(one_hot_targets * log_softmax_logits(logits), axis=-1))
+    return jnp.mean(-jnp.sum(one_hot_targets * log_softmax_logits(logits), axis=-1))
 
 # Step 15 - classification_accuracy
 import jax.numpy as jnp
@@ -111,8 +111,12 @@ def loss_fn_of_params(params, x, one_hot_targets):
     logits = mlp_forward(params, x)
     return cross_entropy_loss(logits, one_hot_targets)
 
-# Step 17 - compute_param_grads (not yet solved)
-# TODO: implement
+# Step 17 - compute_param_grads
+import jax
+import jax.numpy as jnp
+
+def compute_param_grads(params, x, one_hot_targets):
+    return jax.grad(loss_fn_of_params)(params, x, one_hot_targets)
 
 # Step 18 - sgd_update_params (not yet solved)
 # TODO: implement
