@@ -93,8 +93,9 @@ def mlp_forward(params, x):
 def log_softmax_logits(logits):
     return jax.nn.log_softmax(logits, axis=-1)
 
-# Step 14 - cross_entropy_loss (not yet solved)
-# TODO: implement
+# Step 14 - cross_entropy_loss
+def cross_entropy_loss(logits, one_hot_targets):
+    return -jnp.mean(jnp.sum(one_hot_targets * log_softmax_logits(logits), axis=-1))
 
 # Step 15 - classification_accuracy (not yet solved)
 # TODO: implement
