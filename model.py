@@ -59,7 +59,7 @@ def init_linear_layer(key, in_dim, out_dim, scale=0.1):
 def init_mlp_params(key, layer_sizes, scale=0.1):
     n = len(layer_sizes) - 1
     keys = split_prng_key(key, n)
-    arr = np.array([init_linear_layer(keys[i], layer_sizes[i], layer_sizes[i+1], scale) for i in range(n)])
+    arr = [init_linear_layer(keys[i], layer_sizes[i], layer_sizes[i+1], scale) for i in range(n)]
     return arr
 
 # Step 9 - linear_forward
