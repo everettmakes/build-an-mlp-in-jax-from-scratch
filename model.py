@@ -147,6 +147,5 @@ def train_mlp(params, x, one_hot_targets, learning_rate, num_epochs):
 
 # Step 21 - predict_classes
 def predict_classes(params, x):
-    # TODO: run mlp_forward on x and return the argmax class index per row
     return jnp.argmax(mlp_forward(params, x), axis=1)
 
