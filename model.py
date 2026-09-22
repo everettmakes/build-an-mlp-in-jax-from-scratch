@@ -82,8 +82,12 @@ import jax.numpy as jnp
 def softmax_probabilities(logits):
     return jax.nn.softmax(logits, axis=logits.ndim-1)
 
-# Step 12 - mlp_forward (not yet solved)
-# TODO: implement
+# Step 12 - mlp_forward
+def mlp_forward(params, x):
+    for layer in params[:-1]:
+        x = linear_forward(x, layer)
+        x = relu_activation(x)
+    return linear_forward(x, params[-1])
 
 # Step 13 - log_softmax_logits (not yet solved)
 # TODO: implement
